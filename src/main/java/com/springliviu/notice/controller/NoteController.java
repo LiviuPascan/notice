@@ -1,7 +1,9 @@
 package com.springliviu.notice.controller;
 
-import com.springliviu.notice.model.Note;
+import com.springliviu.notice.dto.NoteRequest;
+import com.springliviu.notice.dto.NoteResponse;
 import com.springliviu.notice.service.NoteService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,34 +20,34 @@ public class NoteController {
     }
 
     @GetMapping
-    public List<Note> getAllNotes() {
-        return noteService.getAllNotes(); // gets all notes via service
+    public List<NoteResponse> getAllNotes() {
+        return noteService.getAllNotes(); // returns all notes as DTOs
     }
 
     @PostMapping
-    public Note createNote(@RequestBody Note note) {
-        return noteService.createNote(note); // creates a note via service
+    public NoteResponse createNote(@Valid @RequestBody NoteRequest request) {
+        return noteService.createNote(request); // creates new note from request DTO
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Note> getNoteById(@PathVariable Long id) {
-        return noteService.getNoteById(id) // gets note by ID
-                .map(ResponseEntity::ok) // returns 200 OK
-                .orElse(ResponseEntity.notFound().build()); // or 404 Not Found
+    public ResponseEntity<NoteResponse> getNoteById(@PathVariable Long id) {
+        return noteService.getNoteById(id) // fetches by ID
+                .map(ResponseEntity::ok) // 200 OK
+                .orElse(ResponseEntity.notFound().build()); // 404 Not Found
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody Note updatedNote) {
-        return noteService.updateNote(id, updatedNote) // updates note by ID
-                .map(ResponseEntity::ok) // returns updated note
-                .orElse(ResponseEntity.notFound().build()); // or 404 Not Found
+    public ResponseEntity<NoteResponse> updateNote(@PathVariable Long id, @Valid @RequestBody NoteRequest request) {
+        return noteService.updateNote(id, request) // updates note
+                .map(ResponseEntity::ok) // 200 OK
+                .orElse(ResponseEntity.notFound().build()); // 404 Not Found
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
-        if (noteService.deleteNote(id)) { // deletes note via service
-            return ResponseEntity.noContent().build(); // returns 204 No Content
+        if (noteService.deleteNote(id)) {
+            return ResponseEntity.noContent().build(); // 204 No Content
         }
-        return ResponseEntity.notFound().build(); // or 404 Not Found
+        return ResponseEntity.notFound().build(); // 404 Not Found
     }
 }
