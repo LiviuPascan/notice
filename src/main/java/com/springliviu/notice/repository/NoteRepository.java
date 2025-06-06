@@ -1,15 +1,10 @@
 package com.springliviu.notice.repository;
 
-import com.springliviu.notice.model.Note;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.springliviu.notice.model.Note; // Imports the Note entity
+import org.springframework.data.jpa.repository.JpaRepository; // Base interface for JPA repositories
+import org.springframework.stereotype.Repository; // Marks this interface as a Spring-managed repository bean
 
-@Repository
+@Repository // Indicates that this interface is a Spring repository component
 public interface NoteRepository extends JpaRepository<Note, Long> {
-    // No need to write anything — basic CRUD methods are inherited
+    // No additional methods required — basic CRUD operations are inherited from JpaRepository
 }
-
-
-// @Repository tells Spring this interface handles database operations
-// JpaRepository provides CRUD methods: save(), findById(), findAll(), deleteById() etc.
-// <Note, Long> — Note is the entity type, Long is the type of the primary key

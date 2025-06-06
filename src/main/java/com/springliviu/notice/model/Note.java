@@ -1,48 +1,41 @@
 package com.springliviu.notice.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import jakarta.persistence.*; // JPA annotations for entity mapping
+import jakarta.validation.constraints.NotBlank; // Validation annotation for non-empty fields
+import lombok.*; // Lombok annotations for boilerplate code
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; // Class for date-time values
 
-@Entity
-@Table(name = "notes")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity // Marks this class as a JPA entity
+@Table(name = "notes") // Maps the entity to the "notes" table
+@Getter // Lombok: generates getters for all fields
+@Setter // Lombok: generates setters for all fields
+@NoArgsConstructor // Lombok: generates a no-args constructor
+@AllArgsConstructor // Lombok: generates an all-args constructor
+@Builder // Lombok: enables the builder pattern
 public class Note {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id // Marks the primary key field
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Uses auto-incremented ID generation
+    private Long id; // Unique identifier for each note
 
-    @NotBlank(message = "Title is required")
-    private String title;
+    @NotBlank(message = "Title is required") // Ensures title is not blank during validation
+    private String title; // Title of the note
 
-    private String content;
+    private String content; // Optional content of the note
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; // Timestamp when the note was created
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt; // Timestamp when the note was last updated
 
-    @PrePersist
+    @PrePersist // Runs before the entity is inserted into the database
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = this.createdAt;
+        this.createdAt = LocalDateTime.now(); // Sets creation timestamp
+        this.updatedAt = this.createdAt; // Sets initial update timestamp same as creation
     }
 
-    @PreUpdate
+    @PreUpdate // Runs before the entity is updated in the database
     protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now(); // Updates the timestamp on modification
     }
 }
-// @Entity marks this class as a JPA entity to be mapped to a database table
-// @Table(name = "notes") specifies the table name in the database
-// @Id is the primary key
-// @GeneratedValue sets auto-increment strategy
-// @NotBlank ensures the title field is not empty
-// createdAt and updatedAt are timestamps
-// @PrePersist and @PreUpdate automatically set timestamps on insert/update
