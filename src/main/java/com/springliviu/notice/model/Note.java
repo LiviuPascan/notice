@@ -15,6 +15,11 @@ import java.time.LocalDateTime; // Class for date-time values
 @Builder // Lombok: enables the builder pattern
 public class Note {
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user; // Owner of the note
+
+
     @Id // Marks the primary key field
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Uses auto-incremented ID generation
     private Long id; // Unique identifier for each note
