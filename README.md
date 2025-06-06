@@ -19,9 +19,9 @@ This project demonstrates a clean architectural approach using layered structure
 - Swagger / OpenAPI 3.1 documentation
 - Swagger UI available at `/swagger-ui/index.html`
 - API tested with Postman
+- Authentication and authorization layer
 
 ### Planned
-- Authentication and authorization layer
 - Unit and integration tests (JUnit + MockMvc)
 - Docker containerization (Spring Boot + PostgreSQL)
 - Deployment to cloud platforms (Render, Railway, etc.)
