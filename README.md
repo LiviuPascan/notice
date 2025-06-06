@@ -37,14 +37,37 @@ This project demonstrates a clean architectural approach using layered structure
 - Springdoc OpenAPI 2.x
 
 ## Project Structure
-com.springliviu.notice  
-├── controller       # REST endpoints  
-├── dto              # Request and response models  
-├── exception        # Global exception handling  
-├── model            # JPA entity classes  
-├── repository       # Data access layer  
-├── service          # Business logic  
-└── NoticeApplication.java  # Application entry point
+com.springliviu.notice
+├── config                 # Configuration classes (security, password encoder, Swagger)
+│   ├── PasswordEncoderConfig
+│   ├── SecurityConfig
+│   └── SwaggerConfig
+├── controller             # REST controllers for authentication and note management
+│   ├── AuthController
+│   └── NoteController
+├── dto                    # Data Transfer Objects (request/response payloads)
+│   ├── AuthResponse
+│   ├── LoginRequest
+│   ├── RegisterRequest
+│   ├── NoteRequest
+│   └── NoteResponse
+├── exception              # Global exception handling
+│   └── GlobalExceptionHandler
+├── model                  # JPA entity classes
+│   ├── User
+│   └── Note
+├── repository             # Spring Data JPA repositories
+│   ├── UserRepository
+│   └── NoteRepository
+├── security               # JWT utilities, authentication filters, user details
+│   ├── CustomUserDetailsService
+│   ├── JwtAuthFilter
+│   └── JwtUtil
+├── service                # Business logic and service layer
+│   ├── AuthService
+│   └── NoteService
+└── NoticeApplication.java # Main application entry point
+
 
 ## Sample Request
 POST /api/notes  
