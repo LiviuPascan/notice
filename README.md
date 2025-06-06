@@ -20,10 +20,10 @@ This project demonstrates a clean architectural approach using layered structure
 - Swagger UI available at `/swagger-ui/index.html`
 - API tested with Postman
 - Authentication and authorization layer
-
-### Planned
 - Unit and integration tests (JUnit + MockMvc)
 - Docker containerization (Spring Boot + PostgreSQL)
+
+### Planned
 - Deployment to cloud platforms (Render, Railway, etc.)
 
 ## Technology Stack
