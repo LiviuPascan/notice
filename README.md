@@ -1,29 +1,68 @@
 # NoteKeeper API
-
 NoteKeeper is a simple RESTful web application built with Java 17 and Spring Boot.  
 It allows users to create, read, update, and delete personal notes.  
-The project is designed as a backend API and uses PostgreSQL as the data storage layer.
+The application is backed by a PostgreSQL database.
 
-The goal of this project is to demonstrate clean architectural structure with proper layering (controller-service-repository), DTO usage, validation, and production-ready practices.
+This project demonstrates a clean architectural approach using layered structure (controller → service → repository), DTOs, validation, and production-ready coding practices.
 
-## Project Progress: NoteKeeper API
-
+## Features
 ### Implemented
-- Java 17 + Spring Boot 3.5.0 base project
-- PostgreSQL database integration
+- Java 17 + Spring Boot 3.5.0 base setup
+- PostgreSQL integration using Spring Data JPA
 - Note entity with JPA annotations
-- CRUD repository for Note
-- REST controller with full CRUD API
-- Service layer with business logic (NoteService)
-- DTOs for request and response models
-- Bean validation for incoming requests
-- Application tested via Postman
+- CRUD repository for persistent storage
+- REST controller exposing all CRUD endpoints
+- Service layer containing business logic
+- DTOs for request and response objects
+- Bean validation using Jakarta Validation annotations
+- Global exception handling with structured error responses
+- Swagger / OpenAPI 3.1 documentation
+- Swagger UI available at `/swagger-ui/index.html`
+- API tested with Postman
 
-### Planned Features
-- Global exception handler with custom error responses
-- Swagger/OpenAPI documentation
-- Security layer (authentication and authorization)
-- Unit and integration testing (JUnit + MockMvc)
-- Docker support (PostgreSQL + Spring Boot container)
-- Deployment to Render, Railway, or similar platforms
- 
+### Planned
+- Authentication and authorization layer
+- Unit and integration tests (JUnit + MockMvc)
+- Docker containerization (Spring Boot + PostgreSQL)
+- Deployment to cloud platforms (Render, Railway, etc.)
+
+## Technology Stack
+- Java 17
+- Spring Boot 3.5.0
+- Spring Web
+- Spring Data JPA (Hibernate)
+- PostgreSQL
+- Jakarta Validation
+- Lombok
+- Springdoc OpenAPI 2.x
+
+## Project Structure
+com.springliviu.notice  
+├── controller       # REST endpoints  
+├── dto              # Request and response models  
+├── exception        # Global exception handling  
+├── model            # JPA entity classes  
+├── repository       # Data access layer  
+├── service          # Business logic  
+└── NoticeApplication.java  # Application entry point
+
+## Sample Request
+POST /api/notes  
+Content-Type: application/json  
+
+{  
+  "title": "Meeting notes",  
+  "content": "Discuss project timeline and tasks"  
+}
+
+## Running the Application
+1. Make sure PostgreSQL is running and accessible.  
+2. Configure the database connection in `application.properties` or `application.yml`.  
+3. Build and run the application using:  
+   mvn clean install  
+   mvn spring-boot:run  
+4. Access Swagger UI at:  
+   http://localhost:8080/swagger-ui/index.html
+
+## License
+This project is open-source and available under the MIT License.
